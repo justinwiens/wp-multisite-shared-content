@@ -36,14 +36,13 @@ class WP_Multisite_SharedContent_Initializer {
 				: '1.0.0';
 
 		$this->load_dependencies();
-		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
 
 
 	public function initialize() 
 	{
-		$this->loader->register();
+		$this->registration_manager->register();
 	}
 
 
@@ -58,10 +57,10 @@ class WP_Multisite_SharedContent_Initializer {
 
 	private function define_public_hooks() 
 	{
-		$plugin_public = new WP_Multisite_SharedContent_Public( $this->localization_domain(), $this->get_version() );
+		$plugin_public = new WP_Multisite_SharedContent_Public( $this->get_localization_domain(), $this->get_version() );
 
 		//register shortcode to display shared content
-		$this->loader->add_shortcode( 'wp_multisite_shared_content', $plugin_public, 'display_content' );
+		$this->registration_manager->add_shortcode( 'wp_multisite_shared_content', $plugin_public, 'display_content' );
 	}
 
 } /* WP_Multisite_SharedContent_Initializer */
