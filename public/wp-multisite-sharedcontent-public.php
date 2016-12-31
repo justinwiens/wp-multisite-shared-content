@@ -13,13 +13,13 @@ class WP_Multisite_SharedContent_Public
 	}
 	
 
-	//shortcode that displays content from the oem site (blog #1)
+	//shortcode that displays content from another blog
 	public function display_content($atts)
 	{
 		$requested_blog_id =    $atts['blog'];
 		$requested_content_id = $atts['id'];
 
-		switch_to_blog($this->source_blog_id);
+		switch_to_blog($requested_blog_id);
 
 		$page = get_post($requested_content_id);
 		$content = do_shortcode($page->post_content);
